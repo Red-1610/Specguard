@@ -1,0 +1,47 @@
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+!.env.local.example
+Database_Pass_Supabase.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node.js and Next.js
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Build and runtime output
+build/
+*.log
+*.tmp
+*.temp
+
+# Local databases and caches
+*.sqlite
+*.sqlite3
+*.db
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
