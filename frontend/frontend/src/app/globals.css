@@ -6,3 +6,77 @@ body {
   background-color: #020617;
   color: #f8fafc;
 }
+
+/* Floating Bubble Organic Keyframes */
+@keyframes floatGentle1 {
+  0%, 100% {
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-50%, -50%) translate3d(5px, -7px, 0) scale(1.02);
+  }
+  66% {
+    transform: translate(-50%, -50%) translate3d(-4px, 5px, 0) scale(0.98);
+  }
+}
+
+@keyframes floatGentle2 {
+  0%, 100% {
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-50%, -50%) translate3d(-6px, 6px, 0) scale(0.99);
+  }
+  66% {
+    transform: translate(-50%, -50%) translate3d(5px, -6px, 0) scale(1.03);
+  }
+}
+
+@keyframes floatGentle3 {
+  0%, 100% {
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(6px, -8px, 0) scale(1.02);
+  }
+}
+
+@keyframes floatGentle4 {
+  0%, 100% {
+    transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translate3d(-7px, -5px, 0) scale(1.01);
+  }
+}
+
+@keyframes rootOrbPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 35px rgba(244, 63, 94, 0.4), inset 0 0 16px rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    box-shadow: 0 0 55px rgba(244, 63, 94, 0.65), inset 0 0 24px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.animate-float-bubble-1 {
+  animation: floatGentle1 6.5s ease-in-out infinite;
+}
+
+.animate-float-bubble-2 {
+  animation: floatGentle2 7.8s ease-in-out infinite;
+}
+
+.animate-float-bubble-3 {
+  animation: floatGentle3 8.6s ease-in-out infinite;
+}
+
+.animate-float-bubble-4 {
+  animation: floatGentle4 9.4s ease-in-out infinite;
+}
+
+.animate-root-orb {
+  animation: rootOrbPulse 4.5s ease-in-out infinite;
+}

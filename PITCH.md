@@ -6,6 +6,15 @@
 
 SpecGuard shows developers what may break before they change code by turning repository relationships into an interactive blast-radius map.
 
+### Core Goal & North Star
+
+> **"The ultimate goal of SpecGuard is to eliminate unexpected production regressions by giving developers complete, fearless visibility into the downstream blast radius of every code change."**
+
+#### The 3 Core Pillars:
+1. **Shift Impact Analysis Left:** Catch downstream breakages during local development and PR reviews—*before* staging, deployment, or customer impact.
+2. **Visual Evidence Over Blind Text Search:** Replace hundreds of noisy, unstructured `grep` matches with a connected, interactive bubble graph showing exact line numbers and syntax reference types.
+3. **Automated AI Remediation:** Leverage Amazon Bedrock (Claude 3.5 Sonnet) to convert dry AST evidence into actionable breaking-change predictions and ready-to-run regression test suites.
+
 ## The problem
 
 Developers often change a function, class, configuration value, or service without knowing every part of the codebase that depends on it.
@@ -173,6 +182,8 @@ Future graph nodes can include:
 
 ### Next analysis modes
 
+- Multi-language AST support via Tree-sitter (`.ts`, `.tsx`, `.js`, `.go`, `.java`)
+- File-level blast radius (trace downstream dependencies for any selected file type)
 - Email blast-radius analysis
 - API endpoint impact analysis
 - Git diff impact analysis
@@ -194,11 +205,75 @@ The current prototype performs Python AST reference analysis. It should not clai
 
 Results are intended to help developers investigate and prioritize review, not to replace testing or human judgment.
 
-## Suggested pitch
+---
 
-> Every code change has a blast radius, but most developers discover it only after something breaks. SpecGuard analyzes a real GitHub repository, traces the impact of a selected Python symbol, and visualizes affected files as an interactive map. Instead of giving developers another search result, SpecGuard explains what is connected, where the evidence is, and how much risk the change may carry. The prototype uses Next.js, FastAPI, Supabase Auth, and Python AST analysis, with an AWS deployment path using ECS Fargate, ECR, an Application Load Balancer, Secrets Manager, and CloudWatch.
+## 🎙️ Presentation & Pitch Guide
 
-## Demo closing statement
+### 1. 60-Second Elevator Pitch (Opening Hook)
 
-> SpecGuard helps teams answer one practical question before merging a change: “What else could this affect?”
+> "Judges, every developer has experienced this nightmare: you refactor a function or update a class in one file, push to staging, and unknowingly break three downstream services in production.
+>
+> Code reviews are stressful and blind because existing tools only give you flat keyword search results. They don't show you the **blast radius**.
+>
+> We built **SpecGuard**—an AI-assisted impact analysis engine that shows developers what will break **before** they push code.
+>
+> SpecGuard clones a repository, parses syntax trees, computes a deterministic blast score, and renders the impact as an interactive bubble map with line-by-line evidence."
+
+---
+
+### 2. 90-Second Live Demo Walkthrough Script
+
+1. **Targeting the Codebase:**
+   > *"Here on our dashboard, we enter a real public repository—for example, `encode/uvicorn`—and a core identifier symbol like `Config`."*
+
+2. **Triggering the Real AST Engine:**
+   > *"When I click 'Analyze Real Codebase', our FastAPI backend performs an ephemeral shallow git clone and executes our AST tracer across the codebase in milliseconds."*
+
+3. **Explaining the Visual Results:**
+   > *"Immediately, SpecGuard calculates:*
+   > - *An **Assessed Risk Level** (CRITICAL / MEDIUM / LOW)*
+   > - *A **Blast Score** based on reference depth*
+   > - *An **Interactive Bubble Graph**: The red center bubble is our modified symbol. Surrounding bubbles are the affected files. Notice how clicking any bubble slides open exact line numbers, reference types (import, attribute access, function call), and syntax snippets."*
+
+4. **The Amazon Bedrock AI Agent:**
+   > *"To go a step further, we feed this AST evidence into our AI Impact Agent powered by Amazon Bedrock (Claude 3.5 Sonnet). It synthesizes the graph into breaking-change predictions and generates ready-to-run regression test suites."*
+
+---
+
+### 3. Demo Closing Statement
+
+> "SpecGuard turns blind code reviews and risky refactoring into a clear, visual, evidence-based workflow. It answers the most critical question in software engineering before merging code:
+> **'If I change this, what else will break?'**"
+
+---
+
+## 🛡️ Judge Q&A: Handling "Why only `.py` files? Shouldn't it work for any selected file?"
+
+**If a judge asks:**
+> *"Why does SpecGuard currently only analyze `.py` files? Can it calculate blast radius for any selected file or language?"*
+
+**The Winning Answer:**
+> "That’s a great question, and it speaks directly to our architectural philosophy:
+>
+> 1. **Accuracy over simple text-matching:** Anyone can run `grep` across all files, but string searches produce high false positives—matching variable names inside strings, comments, or unrelated files. To provide true, reliable blast-radius calculation, we use deep Abstract Syntax Tree (AST) parsing, resolving exact class definitions, function calls, imports, and aliases.
+>
+> 2. **Our focused MVP:** For this hackathon, we built our deep AST tracer using Python's native AST engine to prove end-to-end depth: live shallow cloning, static syntax-tree traversal, risk scoring, and interactive bubble visualization.
+>
+> 3. **Roadmap for Any File & Multi-Language:** In our next milestone, we are extending the engine in two ways:
+>    - **File-Level Blast Radius:** Tracing import and export dependency graphs across **any file extension** (`.ts`, `.tsx`, `.js`, `.json`, etc.).
+>    - **Tree-sitter Integration:** Replacing language-specific parsers with **Tree-sitter**, bringing AST-level precision to TypeScript, JavaScript, Go, and Java.
+>
+> Our goal was depth first to avoid false alarms, followed by universal language coverage."
+
+---
+
+### Quick Cheat Sheet for Judges' Q&A
+
+| Potential Question | Your Key Talking Point |
+| :--- | :--- |
+| **"How is this different from GitHub Search or grep?"** | *"Grep matches text strings blindly without context. SpecGuard inspects AST syntax trees, distinguishing between an actual import/call vs. an unrelated string or comment."* |
+| **"Is this scalable to huge codebases?"** | *"Yes. We do shallow depth-1 clones, intelligently prune virtual environments (`.venv`, `node_modules`, `.git`), and AST indexing runs in memory in under a second."* |
+| **"What AWS services are used?"** | *"Backend containerized on **ECS Fargate**, container images in **Amazon ECR**, AI reasoning powered by **Amazon Bedrock (Claude 3.5 Sonnet)**, secrets in **Secrets Manager**, and metrics on **CloudWatch**."* |
+| **"How does the risk score work?"** | *"It's deterministic: calculated from the number of downstream impacted files and symbol reference count across imports, function calls, and attribute accesses."* |
+
 

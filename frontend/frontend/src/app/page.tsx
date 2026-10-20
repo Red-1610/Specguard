@@ -53,35 +53,14 @@ interface AgentAnalysis {
   suggested_mitigations: string[];
 }
 
-const PRESETS = [
-  {
-    label: "uvicorn / Config",
-    repo: "https://github.com/encode/uvicorn",
-    symbol: "Config",
-    origin: "config.py",
-  },
-  {
-    label: "flask / Flask",
-    repo: "https://github.com/pallets/flask",
-    symbol: "Flask",
-    origin: "app.py",
-  },
-  {
-    label: "fastapi / FastAPI",
-    repo: "https://github.com/fastapi/fastapi",
-    symbol: "FastAPI",
-    origin: "applications.py",
-  },
-];
-
 export default function Dashboard() {
   const { user, token, signout, loading: authLoading } = useAuth();
   const router = useRouter();
 
   // Target repository inputs
-  const [repoUrl, setRepoUrl] = useState("https://github.com/encode/uvicorn");
-  const [symbol, setSymbol] = useState("Config");
-  const [originFile, setOriginFile] = useState("config.py");
+  const [repoUrl, setRepoUrl] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [originFile, setOriginFile] = useState("");
 
   const [report, setReport] = useState<BlastReport | null>(null);
   const [loading, setLoading] = useState(false);
@@ -211,14 +190,6 @@ export default function Dashboard() {
     }
   };
 
-  const handleApplyPreset = (preset: typeof PRESETS[0]) => {
-    setRepoUrl(preset.repo);
-    setSymbol(preset.symbol);
-    setOriginFile(preset.origin);
-    setErrorMessage("");
-    setAgentAnalysis(null);
-  };
-
   const handleCopyAffectedFiles = () => {
     if (!report) return;
     const content = report.affected_files.join("\n");
@@ -289,7 +260,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                   AST BLAST RADIUS ENGINE
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-semibold">
-                  AWS BEDROCK AI AGENT
+                  BEDROCK AI powered by AWS
                 </span>
               </div>
               <p className="text-xs text-slate-400">Live Git Clone, Static AST Traversal & Bedrock Break Prediction</p>
@@ -316,19 +287,9 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
             <h2 className="text-sm font-semibold flex items-center gap-2 text-slate-200">
               <Github className="w-4 h-4 text-rose-400" /> Target Public GitHub Repository
             </h2>
-            <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
-              <span className="text-slate-500">Quick presets:</span>
-              {PRESETS.map((p) => (
-                <button
-                  key={p.label}
-                  type="button"
-                  onClick={() => handleApplyPreset(p)}
-                  className="rounded-md border border-slate-800 bg-slate-950/80 px-2 py-0.5 font-mono text-[10px] text-slate-300 hover:border-rose-500/40 hover:text-rose-300 transition"
-                >
-                  {p.label}
-                </button>
-              ))}
-            </div>
+            <span className="text-[11px] text-slate-400 font-mono">
+              Live clone & AST reference extraction
+            </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -341,7 +302,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                   type="text"
                   value={repoUrl}
                   onChange={(e) => setRepoUrl(e.target.value)}
-                  placeholder="https://github.com/encode/uvicorn"
+                  placeholder="https://github.com/owner/repo or owner/repo"
                   className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-slate-200 focus:border-rose-500 focus:outline-none transition"
                 />
               </div>
@@ -356,7 +317,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                   type="text"
                   value={symbol}
                   onChange={(e) => setSymbol(e.target.value)}
-                  placeholder="e.g. Config or parse_headers"
+                  placeholder="e.g. parse_headers or UserProfile"
                   className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-slate-200 focus:border-rose-500 focus:outline-none transition"
                 />
               </div>
@@ -371,7 +332,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                   type="text"
                   value={originFile}
                   onChange={(e) => setOriginFile(e.target.value)}
-                  placeholder="e.g. config.py"
+                  placeholder="e.g. config.py or utils.py (optional)"
                   className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-slate-200 focus:border-rose-500 focus:outline-none transition"
                 />
               </div>
@@ -526,7 +487,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-bold text-white">Amazon Bedrock AI Impact Agent</h3>
+                      <h3 className="text-sm font-bold text-white">AI Impact Agent</h3>
                       <span className="rounded-full border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-rose-300">
                         Claude 3.5 Sonnet · Converse API
                       </span>
