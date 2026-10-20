@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# SpecGuard CLI Runner
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -d "$SCRIPT_DIR/backend/.venv" ]; then
+    exec "$SCRIPT_DIR/backend/.venv/bin/python" "$SCRIPT_DIR/backend/cli.py" "$@"
+else
+    exec python3 "$SCRIPT_DIR/backend/cli.py" "$@"
+fi

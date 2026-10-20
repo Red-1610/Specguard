@@ -75,7 +75,7 @@ export default function SignUpPage() {
           <div>
             <label className="text-xs font-mono text-slate-400 block mb-1">Email</label>
             <input
-              type="text"
+              type="email"
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -98,7 +98,7 @@ export default function SignUpPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 py-2.5 rounded-xl text-sm font-medium transition shadow-lg shadow-rose-600/20 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full mt-2 bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 py-2.5 rounded-xl text-sm font-medium transition shadow-lg shadow-rose-600/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {loading ? "Creating account..." : (
               <>
@@ -108,11 +108,23 @@ export default function SignUpPage() {
           </button>
 
           <div className="grid grid-cols-2 gap-3">
-            <button type="button" onClick={() => handleOAuthSignup("google")} className="w-full border border-slate-700 rounded-xl py-2.5 text-sm hover:bg-slate-800 transition">
-              Continue with Google
+            <button
+              type="button"
+              onClick={() => handleOAuthSignup("google")}
+              className="w-full border border-slate-700/80 bg-slate-950/40 rounded-xl py-2.5 text-sm hover:bg-slate-800 transition flex items-center justify-center gap-2"
+              title="Continue with Google"
+            >
+              <img src="/auth/google.png" alt="Google" className="h-4 w-4 object-contain" />
+              <span className="text-xs text-slate-300">Google</span>
             </button>
-            <button type="button" onClick={() => handleOAuthSignup("github")} className="w-full border border-slate-700 rounded-xl py-2.5 text-sm hover:bg-slate-800 transition">
-              Continue with GitHub
+            <button
+              type="button"
+              onClick={() => handleOAuthSignup("github")}
+              className="w-full border border-slate-700/80 bg-slate-950/40 rounded-xl py-2.5 text-sm hover:bg-slate-800 transition flex items-center justify-center gap-2"
+              title="Continue with GitHub"
+            >
+              <img src="/auth/github.png" alt="GitHub" className="h-4 w-4 object-contain" />
+              <span className="text-xs text-slate-300">GitHub</span>
             </button>
           </div>
         </form>

@@ -1,0 +1,54 @@
+# SpecGuard Container Stack
+# Compatible with both Docker Compose and Podman Compose
+#
+# Usage with Podman:
+#   podman-compose up --build
+#
+# Usage with Docker:
+#   docker compose up --build
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: specguard-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - FRONTEND_ORIGIN=http://localhost:3000,http://127.0.0.1:3000
+      - SUPABASE_URL=${SUPABASE_URL:-https://erjfircpaehnlmfrjqql.supabase.co}
+      - SUPABASE_JWKS_URL=${SUPABASE_JWKS_URL:-https://erjfircpaehnlmfrjqql.supabase.co/auth/v1/.well-known/jwks.json}
+      - SUPABASE_ISSUER=${SUPABASE_ISSUER:-https://erjfircpaehnlmfrjqql.supabase.co/auth/v1}
+      - GITHUB_PAT=${GITHUB_PAT:-}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - specguard-net
+
+  frontend:
+    build:
+      context: ./frontend/frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-https://erjfircpaehnlmfrjqql.supabase.co}
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:-}
+    container_name: specguard-frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - specguard-net
+
+networks:
+  specguard-net:
+    driver: bridge

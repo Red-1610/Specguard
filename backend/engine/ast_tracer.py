@@ -1,6 +1,6 @@
 import ast
 import os
-from typing import Dict, List, Set, Any
+from typing import Dict, List, Set, Any, Optional
 from dataclasses import dataclass, asdict
 
 @dataclass
@@ -73,20 +73,100 @@ class SymbolVisitor(ast.NodeVisitor):
         )
         self.generic_visit(node)
 
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef):
+        snippet = self._get_snippet(node.lineno)
+        self.references.append(
+            ImpactSite(
+                file_path=self.file_path,
+                line_number=node.lineno,
+                context_type="async_function_def",
+                symbol=node.name,
+                code_snippet=snippet
+            )
+        )
+        self.generic_visit(node)
+
+    def visit_ClassDef(self, node: ast.ClassDef):
+        snippet = self._get_snippet(node.lineno)
+        self.references.append(
+            ImpactSite(
+                file_path=self.file_path,
+                line_number=node.lineno,
+                context_type="class_def",
+                symbol=node.name,
+                code_snippet=snippet
+            )
+        )
+        self.generic_visit(node)
+
+    def visit_Import(self, node: ast.Import):
+        snippet = self._get_snippet(node.lineno)
+        for alias in node.names:
+            self.references.append(
+                ImpactSite(
+                    file_path=self.file_path,
+                    line_number=node.lineno,
+                    context_type="import",
+                    symbol=alias.name,
+                    code_snippet=snippet
+                )
+            )
+            if alias.asname and alias.asname != alias.name:
+                self.references.append(
+                    ImpactSite(
+                        file_path=self.file_path,
+                        line_number=node.lineno,
+                        context_type="import_alias",
+                        symbol=alias.asname,
+                        code_snippet=snippet
+                    )
+                )
+        self.generic_visit(node)
+
+    def visit_ImportFrom(self, node: ast.ImportFrom):
+        snippet = self._get_snippet(node.lineno)
+        for alias in node.names:
+            self.references.append(
+                ImpactSite(
+                    file_path=self.file_path,
+                    line_number=node.lineno,
+                    context_type="import_from",
+                    symbol=alias.name,
+                    code_snippet=snippet
+                )
+            )
+            if alias.asname and alias.asname != alias.name:
+                self.references.append(
+                    ImpactSite(
+                        file_path=self.file_path,
+                        line_number=node.lineno,
+                        context_type="import_alias",
+                        symbol=alias.asname,
+                        code_snippet=snippet
+                    )
+                )
+        self.generic_visit(node)
+
 class ASTTracer:
     def __init__(self, workspace_root: str):
-        self.workspace_root = workspace_root
+        self.workspace_root = os.path.abspath(workspace_root)
         self.file_index: Dict[str, List[ImpactSite]] = {}
         self._index_workspace()
 
     def _index_workspace(self):
-        for root, _, files in os.walk(self.workspace_root):
+        ignored_dirs = {
+            ".venv", "venv", "env", "__pycache__", ".git", ".tox",
+            "build", "dist", ".pytest_cache", ".mypy_cache", "site-packages"
+        }
+        for root, dirs, files in os.walk(self.workspace_root):
+            # Prune directories in-place to avoid indexing virtualenvs and caches
+            dirs[:] = [d for d in dirs if d not in ignored_dirs and not d.startswith(".")]
             for file in files:
                 if file.endswith(".py"):
                     full_path = os.path.join(root, file)
-                    rel_path = os.path.relpath(full_path, self.workspace_root)
+                    rel_path = os.path.relpath(full_path, self.workspace_root).replace("\\", "/")
                     try:
-                        with open(full_path, "r", encoding="utf-8") as f:
+                        with open(full_path, "r", encoding="utf-8", errors="replace") as f:
                             content = f.read()
                         source_lines = content.splitlines()
                         tree = ast.parse(content, filename=rel_path)
@@ -100,9 +180,18 @@ class ASTTracer:
         impacted_sites: List[ImpactSite] = []
         affected_files_set: Set[str] = set()
 
+        norm_origin = os.path.normpath(origin_file).strip("./\\").replace("\\", "/") if origin_file else ""
+        origin_has_dirs = "/" in norm_origin
+
         for file_path, sites in self.file_index.items():
-            if origin_file and (file_path == origin_file or os.path.basename(file_path) == os.path.basename(origin_file)):
-                continue
+            norm_file = os.path.normpath(file_path).strip("./\\").replace("\\", "/")
+            if norm_origin:
+                if origin_has_dirs:
+                    if norm_file == norm_origin or norm_file.endswith("/" + norm_origin):
+                        continue
+                else:
+                    if os.path.basename(norm_file) == norm_origin:
+                        continue
 
             for site in sites:
                 if site.symbol == target_symbol:
