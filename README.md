@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.14-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14.1.3-black?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-2.0.0-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Amazon Bedrock](https://img.shields.io/badge/Amazon_Bedrock-Claude_3.5_Sonnet-orange?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/bedrock/)
+[![Amazon Bedrock](https://https://img.shields.io/badge/Amazon_Bedrock-Amazon_Nova_Pro-orange?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/bedrock/)
 [![Container](https://img.shields.io/badge/Container-Podman%20%7C%20Docker-purple?logo=podman&logoColor=white)](https://podman.io/)
 [![Tests](https://img.shields.io/badge/Pytest-Passing%20(100%25)-brightgreen?logo=pytest&logoColor=white)](https://docs.pytest.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
