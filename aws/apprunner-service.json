@@ -1,0 +1,38 @@
+{
+  "ServiceName": "specguard-backend",
+  "SourceConfiguration": {
+    "ImageRepository": {
+      "ImageIdentifier": "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/specguard-backend:latest",
+      "ImageConfiguration": {
+        "Port": "8000",
+        "RuntimeEnvironmentVariables": {
+          "PORT": "8000",
+          "FRONTEND_ORIGIN": "http://localhost:3000",
+          "SUPABASE_URL": "https://erjfircpaehnlmfrjqql.supabase.co",
+          "SUPABASE_JWKS_URL": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1/.well-known/jwks.json",
+          "SUPABASE_ISSUER": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1",
+          "AWS_REGION": "us-east-1",
+          "BEDROCK_MODEL_ID": "amazon.nova-pro-v1:0"
+        }
+      },
+      "ImageRepositoryType": "ECR"
+    },
+    "AutoDeploymentsEnabled": true,
+    "AuthenticationConfiguration": {
+      "AccessRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/AppRunnerECRAccessRole"
+    }
+  },
+  "InstanceConfiguration": {
+    "Cpu": "1 vCPU",
+    "Memory": "2 GB",
+    "InstanceRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/SpecGuardBackendTaskRole"
+  },
+  "HealthCheckConfiguration": {
+    "Protocol": "HTTP",
+    "Path": "/health",
+    "Interval": 10,
+    "Timeout": 5,
+    "HealthyThreshold": 1,
+    "UnhealthyThreshold": 3
+  }
+}

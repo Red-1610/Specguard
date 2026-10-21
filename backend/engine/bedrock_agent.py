@@ -24,10 +24,11 @@ class BedrockImpactAgent:
     and suggests targeted regression test commands.
     """
 
-    DEFAULT_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+    DEFAULT_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "amazon.nova-pro-v1:0")
 
-    def __init__(self, region_name: Optional[str] = None):
+    def __init__(self, region_name: Optional[str] = None, model_id: Optional[str] = None):
         self.region_name = region_name or os.getenv("AWS_REGION", "us-east-1")
+        self.model_id = model_id or self.DEFAULT_MODEL_ID
         self._bedrock_client = None
 
     def _get_client(self):
@@ -76,7 +77,12 @@ class BedrockImpactAgent:
                     change_intent=change_intent
                 )
             except Exception as e:
-                logger.warning("Bedrock invocation failed, using intelligent heuristic fallback: %s", e)
+                logger.warning(
+                    "Bedrock invocation failed (model=%s, region=%s): %s. Using intelligent heuristic fallback.",
+                    self.model_id,
+                    self.region_name,
+                    e
+                )
 
         # Fallback to intelligent local heuristics if AWS Bedrock is offline or uncredentialed
         return self._generate_heuristic_analysis(
@@ -145,15 +151,32 @@ Respond with a JSON object in this exact structure:
 }}"""
 
         # Call Bedrock Converse API
-        response = client.converse(
-            modelId=self.DEFAULT_MODEL_ID,
-            messages=[{"role": "user", "content": [{"text": user_prompt}]}],
-            system=[{"text": system_prompt}],
-            inferenceConfig={
-                "maxTokens": 1500,
-                "temperature": 0.2
-            }
-        )
+        target_model = self.model_id
+        try:
+            response = client.converse(
+                modelId=target_model,
+                messages=[{"role": "user", "content": [{"text": user_prompt}]}],
+                system=[{"text": system_prompt}],
+                inferenceConfig={
+                    "maxTokens": 1500,
+                    "temperature": 0.2
+                }
+            )
+        except Exception as e:
+            # If standard model ID requires cross-region inference profile, attempt with regional profile prefix
+            if "inference profile" in str(e).lower() and not target_model.startswith(("us.", "eu.", "global.")):
+                target_model = f"us.{target_model}"
+                response = client.converse(
+                    modelId=target_model,
+                    messages=[{"role": "user", "content": [{"text": user_prompt}]}],
+                    system=[{"text": system_prompt}],
+                    inferenceConfig={
+                        "maxTokens": 1500,
+                        "temperature": 0.2
+                    }
+                )
+            else:
+                raise
 
         output_text = response["output"]["message"]["content"][0]["text"].strip()
 
@@ -168,7 +191,7 @@ Respond with a JSON object in this exact structure:
 
         data = json.loads(output_text)
         return AgentAnalysisResult(
-            model_used=f"Amazon Bedrock ({self.DEFAULT_MODEL_ID})",
+            model_used=f"Amazon Bedrock ({target_model})",
             executive_summary=data.get("executive_summary", "Analysis completed."),
             breaking_change_risks=data.get("breaking_change_risks", []),
             recommended_tests=data.get("recommended_tests", []),

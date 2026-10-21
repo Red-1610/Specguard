@@ -13,7 +13,7 @@ SpecGuard shows developers what may break before they change code by turning rep
 #### The 3 Core Pillars:
 1. **Shift Impact Analysis Left:** Catch downstream breakages during local development and PR reviews—*before* staging, deployment, or customer impact.
 2. **Visual Evidence Over Blind Text Search:** Replace hundreds of noisy, unstructured `grep` matches with a connected, interactive bubble graph showing exact line numbers and syntax reference types.
-3. **Automated AI Remediation:** Leverage Amazon Bedrock (Claude 3.5 Sonnet) to convert dry AST evidence into actionable breaking-change predictions and ready-to-run regression test suites.
+3. **Automated AI Remediation:** Leverage Amazon Bedrock (Amazon Nova Pro) to convert dry AST evidence into actionable breaking-change predictions and ready-to-run regression test suites.
 
 ## The problem
 
@@ -236,7 +236,7 @@ Results are intended to help developers investigate and prioritize review, not t
    > - *An **Interactive Bubble Graph**: The red center bubble is our modified symbol. Surrounding bubbles are the affected files. Notice how clicking any bubble slides open exact line numbers, reference types (import, attribute access, function call), and syntax snippets."*
 
 4. **The Amazon Bedrock AI Agent:**
-   > *"To go a step further, we feed this AST evidence into our AI Impact Agent powered by Amazon Bedrock (Claude 3.5 Sonnet). It synthesizes the graph into breaking-change predictions and generates ready-to-run regression test suites."*
+   > *"To go a step further, we feed this AST evidence into our AI Impact Agent powered by Amazon Bedrock (Amazon Nova Pro). It synthesizes the graph into breaking-change predictions and generates ready-to-run regression test suites."*
 
 ---
 
@@ -273,7 +273,7 @@ Results are intended to help developers investigate and prioritize review, not t
 | :--- | :--- |
 | **"How is this different from GitHub Search or grep?"** | *"Grep matches text strings blindly without context. SpecGuard inspects AST syntax trees, distinguishing between an actual import/call vs. an unrelated string or comment."* |
 | **"Is this scalable to huge codebases?"** | *"Yes. We do shallow depth-1 clones, intelligently prune virtual environments (`.venv`, `node_modules`, `.git`), and AST indexing runs in memory in under a second."* |
-| **"What AWS services are used?"** | *"Backend containerized on **ECS Fargate**, container images in **Amazon ECR**, AI reasoning powered by **Amazon Bedrock (Claude 3.5 Sonnet)**, secrets in **Secrets Manager**, and metrics on **CloudWatch**."* |
+| **"What AWS services are used?"** | *"Backend containerized on **ECS Fargate**, container images in **Amazon ECR**, AI reasoning powered by **Amazon Bedrock (Amazon Nova Pro)**, secrets in **Secrets Manager**, and metrics on **CloudWatch**."* |
 | **"How does the risk score work?"** | *"It's deterministic: calculated from the number of downstream impacted files and symbol reference count across imports, function calls, and attribute accesses."* |
 
 

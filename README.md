@@ -32,7 +32,7 @@ SpecGuard takes any public GitHub repository or local codebase along with a targ
 1. **Dynamic AST Indexing**: Traverses Abstract Syntax Trees across all Python source files to resolve class definitions, async functions, direct imports, aliases, and attribute accesses.
 2. **Blast-Radius Scoring**: Computes deterministic blast scores and assessed risk levels (`LOW`, `MEDIUM`, `CRITICAL`).
 3. **Interactive Bubble Graph**: Renders affected files as a non-overlapping concentric bubble map with line-by-line source evidence.
-4. **🤖 Amazon Bedrock AI Agent**: Uses Anthropic Claude 3.5 Sonnet on Amazon Bedrock to synthesize findings into breaking change predictions and copy-pasteable regression test suites.
+4. **🤖 Amazon Bedrock AI Agent**: Uses Amazon Nova Pro on Amazon Bedrock to synthesize findings into breaking change predictions and copy-pasteable regression test suites.
 5. **💻 Standalone CLI & Quality Gate**: Run audits directly from your terminal or block risky PRs in CI/CD pipelines with `--exit-code`.
 
 ---
@@ -54,7 +54,11 @@ flowchart TD
     subgraph Backend ["FastAPI Production Engine"]
         API["FastAPI Endpoints"]
         Tracer["Python AST Tracer Engine"]
+<<<<<<< HEAD
         BedrockAgent["Amazon Bedrock AI Agent<br/>(Amazon Nova pro Converse API)"]
+=======
+        BedrockAgent["Amazon Bedrock AI Agent<br/>(Amazon Nova Pro Converse API)"]
+>>>>>>> 06c8c38 (Changes)
     end
 
     subgraph Target ["Target Codebase"]
@@ -84,7 +88,7 @@ flowchart TD
   - `Attribute` property accesses & `Name` symbol references
   - Intelligent directory pruning (`.venv`, `__pycache__`, `.git`) for millisecond traversal
 - 🤖 **Amazon Bedrock AI Agent**:
-  - Integrated via AWS Bedrock Converse API (`anthropic.claude-3-5-sonnet-20240620-v1:0`)
+  - Integrated via AWS Bedrock Converse API (`amazon.nova-pro-v1:0`)
   - Generates executive impact summaries and predicts breaking change vulnerabilities
   - Recommends targeted `pytest` regression commands for affected modules
   - Offline intelligent heuristic fallback when AWS credentials are not configured
@@ -197,7 +201,7 @@ Options:
   --path, -p PATH       Path to a local codebase directory to index directly
   --symbol, -s SYMBOL   (Required) Target identifier symbol to trace
   --origin, -o ORIGIN   Origin file defining symbol to exclude (e.g. 'config.py')
-  --agent, -a           Run Amazon Bedrock AI Agent (Claude 3.5 Sonnet)
+  --agent, -a           Run Amazon Bedrock AI Agent (Amazon Nova Pro)
   --intent, -i INTENT   Planned change description provided to the Bedrock agent
   --format, -f FORMAT   Output format: pretty (default), json, markdown
   --github-token, -t    GitHub PAT for private repos & avoiding IP rate limits

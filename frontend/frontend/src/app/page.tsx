@@ -489,7 +489,7 @@ ${report.affected_files.map((f) => `- ${f}`).join("\n")}`;
                     <div className="flex items-center gap-2">
                       <h3 className="text-sm font-bold text-white">AI Impact Agent</h3>
                       <span className="rounded-full border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 font-mono text-[9px] font-semibold text-rose-300">
-                        Claude 3.5 Sonnet · Converse API
+                        Amazon Nova Pro · Converse API
                       </span>
                     </div>
                     <p className="text-xs text-slate-400">

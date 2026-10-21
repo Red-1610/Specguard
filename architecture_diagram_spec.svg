@@ -1,0 +1,386 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="50%" stop-color="#0d1527"/>
+      <stop offset="100%" stop-color="#050811"/>
+    </linearGradient>
+
+    <!-- Card Gradients -->
+    <linearGradient id="clientCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#15203b" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0e172a" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <linearGradient id="securityCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c1f36" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#111326" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <linearGradient id="backendCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f2b38" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#091b24" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <linearGradient id="bedrockCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a1b12" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1c1209" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <linearGradient id="targetCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e182e" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#120e1e" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Sub-item gradients -->
+    <linearGradient id="itemBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#26354f"/>
+    </linearGradient>
+
+    <linearGradient id="itemCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+
+    <linearGradient id="itemOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+
+    <linearGradient id="novaBadgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#ff5500"/>
+    </linearGradient>
+
+    <!-- Glow filters -->
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="glowOrange" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <!-- Arrow markers -->
+    <marker id="arrowCyan" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#fb923c" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#34d399" />
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#a855f7" />
+    </marker>
+  </defs>
+
+  <style>
+    .font-title { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; }
+    .font-sub { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 500; }
+    .font-bold { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; }
+    .font-mono { font-family: 'Fira Code', 'JetBrains Mono', Consolas, monospace; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1920" height="1080" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Grid Pattern -->
+  <g opacity="0.07" stroke="#94a3b8" stroke-width="1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40"/>
+    </pattern>
+    <rect width="1920" height="1080" fill="url(#grid)" />
+  </g>
+
+  <!-- ==================== HEADER ==================== -->
+  <g transform="translate(100, 50)">
+    <!-- Badge -->
+    <rect x="0" y="0" width="220" height="34" rx="17" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="18" cy="17" r="6" fill="#38bdf8" filter="url(#glowCyan)"/>
+    <text x="34" y="22" fill="#7dd3fc" class="font-bold" font-size="13" letter-spacing="1.5">SYSTEM ARCHITECTURE</text>
+
+    <!-- Main Title -->
+    <text x="0" y="75" fill="#ffffff" class="font-title" font-size="38" letter-spacing="-0.5">
+      SpecGuard <tspan fill="#38bdf8">🛡️</tspan> Architecture Overview
+    </text>
+    <text x="0" y="105" fill="#94a3b8" class="font-sub" font-size="18">
+      AI-Assisted Code Change Impact Analysis &amp; Blast-Radius Engine with Amazon Nova Pro on Bedrock
+    </text>
+  </g>
+
+  <!-- ==================== 1. CLIENT LAYER ==================== -->
+  <g transform="translate(80, 200)" filter="url(#dropShadow)">
+    <rect width="360" height="520" rx="20" fill="url(#clientCard)" stroke="#3b82f6" stroke-width="2" stroke-opacity="0.6"/>
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="360" height="60" rx="20" fill="#1e3a8a" fill-opacity="0.4"/>
+    <circle cx="35" cy="30" r="12" fill="#3b82f6" fill-opacity="0.3"/>
+    <path d="M30 30 L40 30 M35 25 L35 35" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="60" y="37" fill="#93c5fd" class="font-bold" font-size="18" letter-spacing="0.5">CLIENT LAYER</text>
+
+    <!-- Next.js Web App -->
+    <g transform="translate(20, 80)">
+      <rect width="320" height="200" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <rect x="16" y="16" width="36" height="36" rx="8" fill="#0284c7" fill-opacity="0.2" stroke="#38bdf8" stroke-width="1"/>
+      <text x="26" y="40" fill="#38bdf8" class="font-bold" font-size="18">▲</text>
+      <text x="64" y="33" fill="#ffffff" class="font-bold" font-size="17">Next.js 14 Web App</text>
+      <text x="64" y="50" fill="#94a3b8" class="font-sub" font-size="12">Interactive Blast-Radius Frontend</text>
+
+      <path d="M16 68 L304 68" stroke="#334155" stroke-width="1"/>
+
+      <text x="20" y="95" fill="#cbd5e1" class="font-sub" font-size="13">✦ Dynamic Concentric Bubble Map</text>
+      <text x="20" y="122" fill="#cbd5e1" class="font-sub" font-size="13">✦ AST Symbol Evidence Drawer</text>
+      <text x="20" y="149" fill="#cbd5e1" class="font-sub" font-size="13">✦ Deterministic Risk Scorecards</text>
+      <text x="20" y="176" fill="#cbd5e1" class="font-sub" font-size="13">✦ Supabase Auth (GitHub / Google)</text>
+    </g>
+
+    <!-- Standalone CLI Runner -->
+    <g transform="translate(20, 300)">
+      <rect width="320" height="190" rx="14" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+      <rect x="16" y="16" width="36" height="36" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#34d399" stroke-width="1"/>
+      <text x="24" y="40" fill="#34d399" class="font-mono" font-size="18">&gt;_</text>
+      <text x="64" y="33" fill="#ffffff" class="font-bold" font-size="17">SpecGuard CLI</text>
+      <text x="64" y="50" fill="#94a3b8" class="font-sub" font-size="12">Terminal &amp; CI/CD Quality Gate</text>
+
+      <path d="M16 68 L304 68" stroke="#334155" stroke-width="1"/>
+
+      <text x="20" y="95" fill="#cbd5e1" class="font-sub" font-size="13">✦ Formats: ANSI Pretty / JSON / MD</text>
+      <text x="20" y="122" fill="#cbd5e1" class="font-sub" font-size="13">✦ Automated Git PR Comment Tables</text>
+      <text x="20" y="149" fill="#cbd5e1" class="font-sub" font-size="13">✦ CI Quality Gate (--exit-code)</text>
+      <text x="20" y="174" fill="#cbd5e1" class="font-mono" font-size="11" fill-opacity="0.7">specguard audit &lt;symbol&gt;</text>
+    </g>
+  </g>
+
+  <!-- ==================== 2. SECURITY & AUTH ==================== -->
+  <g transform="translate(480, 200)" filter="url(#dropShadow)">
+    <rect width="280" height="520" rx="20" fill="url(#securityCard)" stroke="#8b5cf6" stroke-width="2" stroke-opacity="0.6"/>
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="280" height="60" rx="20" fill="#4c1d95" fill-opacity="0.4"/>
+    <text x="40" y="37" fill="#c4b5fd" class="font-bold" font-size="17" letter-spacing="0.5">SECURITY &amp; GATEWAY</text>
+
+    <!-- Supabase Auth -->
+    <g transform="translate(18, 80)">
+      <rect width="244" height="150" rx="14" fill="#1e1e38" stroke="#6d28d9" stroke-width="1.2"/>
+      <rect x="14" y="14" width="32" height="32" rx="8" fill="#3ecf8e" fill-opacity="0.2"/>
+      <text x="22" y="36" fill="#3ecf8e" class="font-bold" font-size="18">⚡</text>
+      <text x="56" y="30" fill="#ffffff" class="font-bold" font-size="15">Supabase Auth</text>
+      <text x="56" y="44" fill="#a78bfa" class="font-sub" font-size="11">JWKS JWT Verification</text>
+
+      <path d="M14 58 L230 58" stroke="#3730a3" stroke-width="1"/>
+      <text x="14" y="85" fill="#e2e8f0" class="font-sub" font-size="12">• Asymmetric Key Verification</text>
+      <text x="14" y="108" fill="#e2e8f0" class="font-sub" font-size="12">• Bearer Token Security</text>
+      <text x="14" y="131" fill="#e2e8f0" class="font-sub" font-size="12">• RBAC / User Claims</text>
+    </g>
+
+    <!-- Rate Limiting & Protection -->
+    <g transform="translate(18, 250)">
+      <rect width="244" height="240" rx="14" fill="#1e1e38" stroke="#6d28d9" stroke-width="1.2"/>
+      <rect x="14" y="14" width="32" height="32" rx="8" fill="#ec4899" fill-opacity="0.2"/>
+      <text x="22" y="36" fill="#f472b6" class="font-bold" font-size="18">🛡️</text>
+      <text x="56" y="30" fill="#ffffff" class="font-bold" font-size="15">SlowAPI &amp; CORS</text>
+      <text x="56" y="44" fill="#a78bfa" class="font-sub" font-size="11">Rate Limit Guard</text>
+
+      <path d="M14 58 L230 58" stroke="#3730a3" stroke-width="1"/>
+      <text x="14" y="83" fill="#e2e8f0" class="font-sub" font-size="12">• 5/min Audit Throttle</text>
+      <text x="14" y="106" fill="#e2e8f0" class="font-sub" font-size="12">• 15/min Bedrock Agent</text>
+      <text x="14" y="129" fill="#e2e8f0" class="font-sub" font-size="12">• 30/min Auth Limiter</text>
+      <text x="14" y="152" fill="#e2e8f0" class="font-sub" font-size="12">• 60/min Health Ping</text>
+      <text x="14" y="175" fill="#e2e8f0" class="font-sub" font-size="12">• Git Arg Injection Defense</text>
+      <text x="14" y="205" fill="#38bdf8" class="font-mono" font-size="11">git clone -- [repo_url]</text>
+    </g>
+  </g>
+
+  <!-- ==================== 3. FASTAPI BACKEND PRODUCTION ENGINE ==================== -->
+  <g transform="translate(800, 180)" filter="url(#dropShadow)">
+    <rect width="490" height="560" rx="22" fill="url(#backendCard)" stroke="#06b6d4" stroke-width="2.5" filter="url(#glowCyan)"/>
+    <rect width="490" height="560" rx="22" fill="url(#backendCard)" stroke="#06b6d4" stroke-width="2.5"/>
+
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="490" height="66" rx="22" fill="#083344" fill-opacity="0.7"/>
+    <rect x="20" y="15" width="36" height="36" rx="8" fill="#009688" fill-opacity="0.3" stroke="#009688" stroke-width="1.5"/>
+    <text x="27" y="39" fill="#2dd4bf" class="font-bold" font-size="18">⚡</text>
+    <text x="68" y="38" fill="#ffffff" class="font-bold" font-size="19" letter-spacing="0.5">FASTAPI BACKEND ENGINE</text>
+    <rect x="365" y="20" width="105" height="26" rx="13" fill="#14b8a6" fill-opacity="0.25" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="375" y="37" fill="#5eead4" class="font-mono" font-size="11">Python 3.14</text>
+
+    <!-- Sub-Component 1: REST Endpoints -->
+    <g transform="translate(20, 80)">
+      <rect width="450" height="120" rx="12" fill="#082f49" fill-opacity="0.6" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="18" y="28" fill="#38bdf8" class="font-bold" font-size="15">FastAPI Endpoints (Uvicorn ASGI)</text>
+      <text x="18" y="52" fill="#e2e8f0" class="font-mono" font-size="12">POST /api/analyze</text>
+      <text x="220" y="52" fill="#94a3b8" class="font-sub" font-size="12">→ Full AST blast analysis</text>
+      <text x="18" y="74" fill="#e2e8f0" class="font-mono" font-size="12">POST /api/agent/suggest-tests</text>
+      <text x="265" y="74" fill="#94a3b8" class="font-sub" font-size="12">→ Bedrock impact AI</text>
+      <text x="18" y="96" fill="#e2e8f0" class="font-mono" font-size="12">GET  /api/health</text>
+      <text x="220" y="96" fill="#94a3b8" class="font-sub" font-size="12">→ Liveness &amp; uptime checks</text>
+    </g>
+
+    <!-- Sub-Component 2: AST Tracer Engine -->
+    <g transform="translate(20, 215)">
+      <rect width="450" height="155" rx="12" fill="#082f49" fill-opacity="0.6" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="18" y="28" fill="#38bdf8" class="font-bold" font-size="15">Python AST Tracer Engine (ast_tracer.py)</text>
+      <text x="18" y="54" fill="#e2e8f0" class="font-sub" font-size="13">✦ ClassDef &amp; AsyncFunctionDef Recursive Node Traversal</text>
+      <text x="18" y="78" fill="#e2e8f0" class="font-sub" font-size="13">✦ Import &amp; ImportFrom Alias Resolution (e.g. `as np`)</text>
+      <text x="18" y="102" fill="#e2e8f0" class="font-sub" font-size="13">✦ Attribute Access &amp; Name Symbol Reference Resolving</text>
+      <text x="18" y="126" fill="#e2e8f0" class="font-sub" font-size="13">✦ Millisecond Directory Pruning (.venv, __pycache__, .git)</text>
+    </g>
+
+    <!-- Sub-Component 3: Blast Radius Risk Engine -->
+    <g transform="translate(20, 385)">
+      <rect width="450" height="145" rx="12" fill="#082f49" fill-opacity="0.6" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="18" y="28" fill="#38bdf8" class="font-bold" font-size="15">Blast-Radius Scoring &amp; Diff Parser</text>
+      <text x="18" y="54" fill="#e2e8f0" class="font-sub" font-size="13">✦ Git Diff Parser: Detects modified symbol definitions</text>
+      <text x="18" y="78" fill="#e2e8f0" class="font-sub" font-size="13">✦ Weighted Dependency Distance Scoring (0 - 100)</text>
+      
+      <!-- Risk Badges -->
+      <g transform="translate(18, 95)">
+        <rect x="0" y="0" width="70" height="26" rx="6" fill="#15803d" fill-opacity="0.4" stroke="#22c55e" stroke-width="1"/>
+        <text x="17" y="18" fill="#4ade80" class="font-bold" font-size="11">LOW</text>
+
+        <rect x="85" y="0" width="90" height="26" rx="6" fill="#b45309" fill-opacity="0.4" stroke="#f59e0b" stroke-width="1"/>
+        <text x="96" y="18" fill="#fbbf24" class="font-bold" font-size="11">MEDIUM</text>
+
+        <rect x="190" y="0" width="95" height="26" rx="6" fill="#b91c1c" fill-opacity="0.4" stroke="#ef4444" stroke-width="1"/>
+        <text x="201" y="18" fill="#f87171" class="font-bold" font-size="11">CRITICAL</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== 4. CLOUD & AI: AMAZON BEDROCK / NOVA ==================== -->
+  <g transform="translate(1330, 180)" filter="url(#dropShadow)">
+    <rect width="510" height="560" rx="22" fill="url(#bedrockCard)" stroke="#f97316" stroke-width="2.5" filter="url(#glowOrange)"/>
+    <rect width="510" height="560" rx="22" fill="url(#bedrockCard)" stroke="#f97316" stroke-width="2.5"/>
+
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="510" height="66" rx="22" fill="#431407" fill-opacity="0.7"/>
+    <rect x="20" y="15" width="36" height="36" rx="8" fill="#ea580c" fill-opacity="0.3" stroke="#f97316" stroke-width="1.5"/>
+    <text x="27" y="40" fill="#fb923c" class="font-bold" font-size="18">☁️</text>
+    <text x="68" y="38" fill="#ffffff" class="font-bold" font-size="19" letter-spacing="0.5">AWS BEDROCK &amp; AMAZON NOVA</text>
+    <rect x="375" y="20" width="115" height="26" rx="13" fill="#ea580c" fill-opacity="0.25" stroke="#fb923c" stroke-width="1"/>
+    <text x="388" y="37" fill="#fed7aa" class="font-mono" font-size="11">AWS Cloud</text>
+
+    <!-- Sub-Component 1: Amazon Bedrock Runtime -->
+    <g transform="translate(20, 80)">
+      <rect width="470" height="120" rx="12" fill="#3a1d10" fill-opacity="0.7" stroke="#ea580c" stroke-width="1.2"/>
+      <text x="18" y="28" fill="#fed7aa" class="font-bold" font-size="15">Amazon Bedrock Runtime (Boto3)</text>
+      <text x="18" y="52" fill="#e2e8f0" class="font-sub" font-size="12">• AWS Bedrock Converse API Integration</text>
+      <text x="18" y="74" fill="#e2e8f0" class="font-sub" font-size="12">• Standard IAM Credential Resolution (Env / ECS / Fargate)</text>
+      <text x="18" y="96" fill="#e2e8f0" class="font-sub" font-size="12">• Region: <tspan fill="#fdba74" class="font-mono">us-east-1</tspan> | Converse Spec Structured JSON</text>
+    </g>
+
+    <!-- Sub-Component 2: Amazon Nova Pro Highlight -->
+    <g transform="translate(20, 215)">
+      <rect width="470" height="155" rx="12" fill="#4a1e0b" fill-opacity="0.9" stroke="#f97316" stroke-width="2"/>
+      
+      <!-- Nova Pill -->
+      <rect x="18" y="16" width="220" height="28" rx="14" fill="url(#novaBadgeGrad)"/>
+      <text x="30" y="35" fill="#ffffff" class="font-bold" font-size="13">✦ Amazon Nova Pro Model</text>
+      
+      <text x="250" y="35" fill="#fed7aa" class="font-mono" font-size="12">amazon.nova-pro-v1:0</text>
+      
+      <text x="18" y="74" fill="#ffedd5" class="font-bold" font-size="14">BedrockImpactAgent (bedrock_agent.py):</text>
+      <text x="18" y="98" fill="#fdba74" class="font-sub" font-size="13">1. Executive Impact Analysis &amp; Blast Radius Synthesis</text>
+      <text x="18" y="120" fill="#fdba74" class="font-sub" font-size="13">2. Breaking Change Prediction (Signatures, kwargs, returns)</text>
+      <text x="18" y="142" fill="#fdba74" class="font-sub" font-size="13">3. Automated Targeted Regression Pytest Generation</text>
+    </g>
+
+    <!-- Sub-Component 3: Resilient Fallback Engine -->
+    <g transform="translate(20, 385)">
+      <rect width="470" height="145" rx="12" fill="#3a1d10" fill-opacity="0.7" stroke="#ea580c" stroke-width="1.2"/>
+      <text x="18" y="28" fill="#fed7aa" class="font-bold" font-size="15">Resilience &amp; Fallback Architecture</text>
+      <text x="18" y="54" fill="#e2e8f0" class="font-sub" font-size="13">✦ Offline Heuristic Fallback when AWS is unconfigured</text>
+      <text x="18" y="78" fill="#e2e8f0" class="font-sub" font-size="13">✦ Zero-crash graceful degradation for air-gapped CI/CD</text>
+      <text x="18" y="102" fill="#e2e8f0" class="font-sub" font-size="13">✦ Structured Response Mapping (AgentAnalysisResult dataclass)</text>
+      <text x="18" y="126" fill="#a7f3d0" class="font-mono" font-size="11">pytest tests/test_*.py -k "affected_symbol"</text>
+    </g>
+  </g>
+
+  <!-- ==================== 5. TARGET CODEBASE LAYER ==================== -->
+  <g transform="translate(480, 780)" filter="url(#dropShadow)">
+    <rect width="960" height="210" rx="20" fill="url(#targetCard)" stroke="#a855f7" stroke-width="2" stroke-opacity="0.6"/>
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="960" height="50" rx="20" fill="#3b0764" fill-opacity="0.4"/>
+    <text x="30" y="32" fill="#e9d5ff" class="font-bold" font-size="16" letter-spacing="0.5">TARGET CODEBASE &amp; REPOSITORY SOURCE</text>
+
+    <!-- Git Shallow Clone -->
+    <g transform="translate(30, 68)">
+      <rect width="425" height="115" rx="12" fill="#2e1065" fill-opacity="0.5" stroke="#9333ea" stroke-width="1.2"/>
+      <text x="20" y="32" fill="#d8b4fe" class="font-bold" font-size="15">Ephemeral Shallow Git Cloner</text>
+      <text x="20" y="58" fill="#e9d5ff" class="font-sub" font-size="13">• Fast clone with depth=1 flag</text>
+      <text x="20" y="80" fill="#e9d5ff" class="font-sub" font-size="13">• Temporary auto-cleaning workspace directory</text>
+      <text x="20" y="102" fill="#e9d5ff" class="font-sub" font-size="13">• GitHub PAT token support for private repos</text>
+    </g>
+
+    <!-- Local Workspace -->
+    <g transform="translate(495, 68)">
+      <rect width="435" height="115" rx="12" fill="#2e1065" fill-opacity="0.5" stroke="#9333ea" stroke-width="1.2"/>
+      <text x="20" y="32" fill="#d8b4fe" class="font-bold" font-size="15">Local Workspace Analysis</text>
+      <text x="20" y="58" fill="#e9d5ff" class="font-sub" font-size="13">• In-situ zero-clone direct scanning</text>
+      <text x="20" y="80" fill="#e9d5ff" class="font-sub" font-size="13">• Real-time working tree change detection</text>
+      <text x="20" y="102" fill="#e9d5ff" class="font-sub" font-size="13">• Preserves repo state without side effects</text>
+    </g>
+  </g>
+
+  <!-- ==================== CONNECTING DATA FLOW ARROWS ==================== -->
+  <!-- 1. Client to Security -->
+  <g stroke="#38bdf8" stroke-width="2.5" fill="none">
+    <path d="M440 320 L480 320" marker-end="url(#arrowCyan)"/>
+    <path d="M440 460 L480 460" marker-end="url(#arrowCyan)"/>
+  </g>
+
+  <!-- 2. Security to Backend -->
+  <g stroke="#38bdf8" stroke-width="2.5" fill="none">
+    <path d="M760 380 L800 380" marker-end="url(#arrowCyan)"/>
+    <text x="765" y="370" fill="#7dd3fc" class="font-mono" font-size="10" stroke="none">JWT Valid</text>
+  </g>
+
+  <!-- 3. Backend to Target Codebase -->
+  <g stroke="#a855f7" stroke-width="2.5" fill="none">
+    <path d="M920 740 L920 780" marker-end="url(#arrowPurple)"/>
+    <text x="930" y="765" fill="#d8b4fe" class="font-mono" font-size="11" stroke="none">Scan Source Tree</text>
+  </g>
+
+  <!-- 4. Target Codebase back to AST Engine -->
+  <g stroke="#34d399" stroke-width="2.5" fill="none">
+    <path d="M1040 780 L1040 740" marker-end="url(#arrowGreen)"/>
+    <text x="1050" y="765" fill="#6ee7b7" class="font-mono" font-size="11" stroke="none">AST Node Stream</text>
+  </g>
+
+  <!-- 5. Backend AST to Bedrock Agent (Converse API) -->
+  <g stroke="#fb923c" stroke-width="2.5" fill="none">
+    <path d="M1290 380 L1330 380" marker-end="url(#arrowOrange)"/>
+    <text x="1295" y="370" fill="#fed7aa" class="font-mono" font-size="10" stroke="none">AST Findings</text>
+  </g>
+
+  <!-- 6. Bedrock Agent AI Response back to Backend -->
+  <g stroke="#fb923c" stroke-width="2.5" stroke-dasharray="6,4" fill="none">
+    <path d="M1330 460 L1290 460" marker-end="url(#arrowOrange)"/>
+    <text x="1293" y="480" fill="#fed7aa" class="font-mono" font-size="10" stroke="none">AI Predictions</text>
+  </g>
+
+  <!-- 7. Return to Client -->
+  <g stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,4" fill="none">
+    <path d="M800 520 L440 520" marker-end="url(#arrowCyan)"/>
+    <text x="560" y="512" fill="#7dd3fc" class="font-mono" font-size="11" stroke="none">Interactive Graph Payload &amp; Tests</text>
+  </g>
+
+  <!-- ==================== FOOTER ==================== -->
+  <g transform="translate(100, 1030)">
+    <circle cx="0" cy="0" r="5" fill="#22c55e"/>
+    <text x="15" y="4" fill="#64748b" class="font-sub" font-size="13">
+      Production Architecture: FastAPI (Uvicorn ASGI) • AWS Bedrock (Amazon Nova Pro amazon.nova-pro-v1:0) • Next.js 14 Web • SpecGuard CLI
+    </text>
+  </g>
+</svg>

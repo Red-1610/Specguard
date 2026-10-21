@@ -1,0 +1,47 @@
+{
+  "family": "specguard-backend-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/SpecGuardBackendTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "specguard-backend",
+      "image": "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/specguard-backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "PORT", "value": "8000" },
+        { "name": "FRONTEND_ORIGIN", "value": "http://localhost:3000" },
+        { "name": "SUPABASE_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co" },
+        { "name": "SUPABASE_JWKS_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1/.well-known/jwks.json" },
+        { "name": "SUPABASE_ISSUER", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1" },
+        { "name": "AWS_REGION", "value": "us-east-1" },
+        { "name": "BEDROCK_MODEL_ID", "value": "amazon.nova-pro-v1:0" }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 10
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/specguard-backend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

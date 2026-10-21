@@ -21,7 +21,13 @@ else:
     from engine.ast_tracer import ASTTracer
     from engine.bedrock_agent import BedrockImpactAgent
 
-load_dotenv()
+from pathlib import Path
+
+# Load environment variables from backend/.env and root .env
+load_dotenv(Path(__file__).resolve().parent / ".env")
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("specguard.auth")
 
 app = FastAPI(title="SpecGuard Production Engine", version="2.0.0")
@@ -159,7 +165,7 @@ def explain_with_agent(
     current_user: str = Depends(get_current_user),
 ):
     """
-    Invokes Amazon Bedrock (Claude 3.5 Sonnet) Impact Agent to synthesize
+    Invokes Amazon Bedrock (Amazon Nova Pro) Impact Agent to synthesize
     AST evidence into actionable break-predictions and test recommendations.
     """
     agent = BedrockImpactAgent()
@@ -181,6 +187,5 @@ def get_scan_history(request: Request, current_user: str = Depends(get_current_u
     return {"history": user_scans}
 
 @app.get("/health")
-@limiter.limit("60/minute")
 def health(request: Request):
     return {"status": "ok"}
