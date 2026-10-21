@@ -54,7 +54,7 @@ flowchart TD
     subgraph Backend ["FastAPI Production Engine"]
         API["FastAPI Endpoints"]
         Tracer["Python AST Tracer Engine"]
-        BedrockAgent["Amazon Bedrock AI Agent<br/>(Claude 3.5 Sonnet Converse API)"]
+        BedrockAgent["Amazon Bedrock AI Agent<br/>(Amazon Nova pro Converse API)"]
     end
 
     subgraph Target ["Target Codebase"]
