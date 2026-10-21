@@ -246,7 +246,7 @@ For deployment on AWS:
 | :--- | :--- | :--- |
 | **Frontend** | **AWS Amplify** | Serverless Next.js 14 deployment with global CDN edge hosting. |
 | **Backend API** | **AWS App Runner / ECS Fargate** | Fully managed containerized FastAPI backend with auto-scaling. |
-| **AI Agent** | **Amazon Bedrock** | Claude 3.5 Sonnet via Converse API for architectural impact synthesis. |
+| **AI Agent** | **Amazon Bedrock** | Amazon Nova Pro via Converse API for architectural impact synthesis. |
 | **Containers** | **Amazon ECR** | Secure, versioned container image registry. |
 | **Secrets** | **AWS Secrets Manager** | Manages Supabase JWKS and AWS credentials. |
 | **Observability**| **Amazon CloudWatch** | Structured API latency, error metrics, and rate limit telemetry. |
