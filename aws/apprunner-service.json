@@ -2,7 +2,7 @@
   "ServiceName": "specguard-backend",
   "SourceConfiguration": {
     "ImageRepository": {
-      "ImageIdentifier": "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/specguard-backend:latest",
+      "ImageIdentifier": "304485839168.dkr.ecr.us-east-1.amazonaws.com/specguard-backend:latest",
       "ImageConfiguration": {
         "Port": "8000",
         "RuntimeEnvironmentVariables": {
@@ -19,13 +19,13 @@
     },
     "AutoDeploymentsEnabled": true,
     "AuthenticationConfiguration": {
-      "AccessRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/AppRunnerECRAccessRole"
+      "AccessRoleArn": "arn:aws:iam::304485839168:role/AppRunnerECRAccessRole"
     }
   },
   "InstanceConfiguration": {
     "Cpu": "1 vCPU",
     "Memory": "2 GB",
-    "InstanceRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/SpecGuardBackendTaskRole"
+    "InstanceRoleArn": "arn:aws:iam::304485839168:role/SpecGuardBackendTaskRole"
   },
   "HealthCheckConfiguration": {
     "Protocol": "HTTP",
