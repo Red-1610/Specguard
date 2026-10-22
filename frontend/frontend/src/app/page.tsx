@@ -54,7 +54,7 @@ interface AgentAnalysis {
 }
 
 const getApiUrl = () => {
-  const raw = process.env.NEXT_PUBLIC_API_URL || "";
+  const raw = (process.env.NEXT_PUBLIC_API_URL || "").trim().replace(/\/+$/, "");
   if (typeof window !== "undefined" && window.location.protocol === "https:" && raw.startsWith("http://")) {
     return "";
   }
