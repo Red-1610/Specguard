@@ -35,14 +35,14 @@ limiter = Limiter(key_func=get_remote_address)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-frontend_origins_raw = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000,http://127.0.0.1:3000")
+frontend_origins_raw = os.getenv("FRONTEND_ORIGIN", "*")
 allowed_origins = [o.strip() for o in frontend_origins_raw.split(",") if o.strip()]
-if "*" in allowed_origins or not allowed_origins:
-    allowed_origins = ["*"]
+use_wildcard = "*" in allowed_origins or not allowed_origins
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=[] if use_wildcard else allowed_origins,
+    allow_origin_regex=r"^https?://.*" if use_wildcard else None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
