@@ -20,7 +20,7 @@
       ],
       "environment": [
         { "name": "PORT", "value": "8000" },
-        { "name": "FRONTEND_ORIGIN", "value": "http://localhost:3000" },
+        { "name": "FRONTEND_ORIGIN", "value": "*" },
         { "name": "SUPABASE_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co" },
         { "name": "SUPABASE_JWKS_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1/.well-known/jwks.json" },
         { "name": "SUPABASE_ISSUER", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1" },
@@ -39,7 +39,8 @@
         "options": {
           "awslogs-group": "/ecs/specguard-backend",
           "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "ecs"
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true"
         }
       }
     }
