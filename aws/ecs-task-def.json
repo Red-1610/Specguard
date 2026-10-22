@@ -20,7 +20,7 @@
       ],
       "environment": [
         { "name": "PORT", "value": "8000" },
-        { "name": "FRONTEND_ORIGIN", "value": "*" },
+        { "name": "FRONTEND_ORIGIN", "value": "https://main.d3oetpwmbld139.amplifyapp.com,http://localhost:3000" },
         { "name": "SUPABASE_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co" },
         { "name": "SUPABASE_JWKS_URL", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1/.well-known/jwks.json" },
         { "name": "SUPABASE_ISSUER", "value": "https://erjfircpaehnlmfrjqql.supabase.co/auth/v1" },
