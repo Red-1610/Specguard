@@ -37,12 +37,11 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 frontend_origins_raw = os.getenv("FRONTEND_ORIGIN", "*")
 allowed_origins = [o.strip() for o in frontend_origins_raw.split(",") if o.strip()]
-use_wildcard = "*" in allowed_origins or not allowed_origins
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[] if use_wildcard else allowed_origins,
-    allow_origin_regex=r"^https?://.*" if use_wildcard else None,
+    allow_origins=allowed_origins if ("*" not in allowed_origins and allowed_origins) else [],
+    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
