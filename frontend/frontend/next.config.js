@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: process.env.OUTPUT_STANDALONE ? 'standalone' : 'export',
+  trailingSlash: true,
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = nextConfig;
