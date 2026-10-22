@@ -53,6 +53,14 @@ interface AgentAnalysis {
   suggested_mitigations: string[];
 }
 
+const getApiUrl = () => {
+  const raw = process.env.NEXT_PUBLIC_API_URL || "";
+  if (typeof window !== "undefined" && window.location.protocol === "https:" && raw.startsWith("http://")) {
+    return "";
+  }
+  return raw || (typeof window !== "undefined" && window.location.hostname === "localhost" ? "http://127.0.0.1:8000" : "");
+};
+
 export default function Dashboard() {
   const { user, token, signout, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -92,7 +100,7 @@ export default function Dashboard() {
     setAgentError("");
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+      const apiUrl = getApiUrl();
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -144,7 +152,7 @@ export default function Dashboard() {
     setAgentError("");
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+      const apiUrl = getApiUrl();
       const {
         data: { session },
       } = await supabase.auth.getSession();
